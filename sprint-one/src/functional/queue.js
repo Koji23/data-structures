@@ -8,21 +8,12 @@ var Queue = function() {
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
-    //create property on storage using next key
-    //increment length
-    //increment next key
     storage[_nextKey] = value;
     _length++;
     _nextKey++;
   };
 
   someInstance.dequeue = function() {
-    //check if length isn't 0
-      //create var toDequeueu
-      //delete storage property at (nextKey - length)
-      //decrement length
-      //return toDequeueueu
-    //else return 0
     if (_length) {
       var toDequeue = storage[_nextKey - _length];
       delete storage[_nextKey - _length];
