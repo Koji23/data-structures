@@ -21,9 +21,8 @@ var queueMethods = {
   dequeue: function() {
 
   },
-
   size: function() {
-
+    return this._length;
   }
 };
 
