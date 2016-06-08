@@ -16,11 +16,13 @@ var queueMethods = {
   //holds queue methods obviously:
 
   enqueue: function(value) {
-
+    this[this.length] = value;
+    this.length++;
+    this.nextKey++;
   },
 
   dequeue: function() {
-
+    
   },
   size: function() {
     return this.length;
