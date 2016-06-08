@@ -1,11 +1,12 @@
 var Queue = function() {
-  var storage = {
+
+  return {
     enqueue: queueMethods.enqueue,
     dequeue: queueMethods.dequeue,
-    size: queueMethods.size
+    size: queueMethods.size,
+    length: 0,
+    nextKey: 0
   };
-  var _length = 0;
-  var _nextKey = 0;
 
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
@@ -22,8 +23,6 @@ var queueMethods = {
 
   },
   size: function() {
-    return this._length;
+    return this.length;
   }
 };
-
-
