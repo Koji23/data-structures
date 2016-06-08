@@ -17,6 +17,20 @@ var Queue = function() {
   };
 
   someInstance.dequeue = function() {
+    //check if length isn't 0
+      //create var toDequeueu
+      //delete storage property at (nextKey - length)
+      //decrement length
+      //return toDequeueueu
+    //else return 0
+    if (_length) {
+      var toDequeue = storage[_nextKey - _length];
+      delete storage[_nextKey - _length];
+      _length--;
+      return toDequeue;
+    } else {
+      return 0;
+    }
   };
 
   someInstance.size = function() {
