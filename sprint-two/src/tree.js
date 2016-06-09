@@ -3,17 +3,22 @@ var Tree = function(value) {
   newTree.value = value;
 
   // your code here
-  newTree.children = null;  // fix me
+  newTree.children = [];  // fix me - contains array of child nodes
+  _.extend(newTree, treeMethods);
 
   return newTree;
 };
 
 var treeMethods = {};
 
-treeMethods.addChild = function(value) {
+treeMethods.addChild = function(value) {  // append a node to current children array
+  //create a new tree with value: value
+  //push new tree to this' children array
+  var newLeaf = Tree(value);
+  this.children.push(newLeaf);  
 };
 
-treeMethods.contains = function(target) {
+treeMethods.contains = function(target) { // inspect all nodes at and below calling node to determine if tree contains target
 };
 
 
