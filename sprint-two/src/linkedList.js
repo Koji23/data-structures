@@ -18,6 +18,20 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
+    //check if Head exits
+      //check if Head.next exists
+        //Change Head to Head.next
+      //else Head.next = null and Head.tail = null
+    if (this.head) {
+      var severedHead = this.head;
+      if (this.head.next) {
+        this.head = this.head.next;
+      } else {
+        this.head = null;
+        this.tail = null;
+      }
+    }
+    return severedHead.value;
   };
 
   list.contains = function(target) {
