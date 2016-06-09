@@ -19,9 +19,19 @@ treeMethods.addChild = function(value) {  // append a node to current children a
 };
 
 treeMethods.contains = function(target) { // inspect all nodes at and below calling node to determine if tree contains target
+  //recurse through:
+   //base:
+  if (this.value === target) {
+    return true;
+  } else {
+    for (var childInd = 0, length = this.children.length; childInd < length; childInd++) {
+      if (this.children[childInd].contains(target)) {
+        return true;
+      }
+    }
+    return false;
+  }
 };
-
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
