@@ -18,6 +18,16 @@ stackMethods.push = function(val) {
 };
 
 stackMethods.pop = function() {
+  if (!this.length) {
+    return 0;
+  }
+  this.length--;  
+  var toReturn = this.storage[this.length];
+  delete this.storage[this.length];
+  return toReturn;
 };
 
+stackMethods.size = function() {
+  return this.length;
+};
 
