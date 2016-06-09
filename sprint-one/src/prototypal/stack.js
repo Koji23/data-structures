@@ -14,7 +14,13 @@ var stackMethods = {
     this.lastInd++;
   },
   pop: function() {
-
+    if (!this.lastInd) {
+      return 0;
+    }
+    this.lastInd--;
+    var toPop = this.storage[this.lastInd];
+    delete this.storage[this.lastInd];
+    return toPop;
   },
   size: function() {
     return this.lastInd;
