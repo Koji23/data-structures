@@ -8,7 +8,8 @@ var Queue = function() {
 };
 
 Queue.prototype.enqueue = function(val) {
-
+  this.storage[this.lastInd] = val;
+  this.lastInd++;
 };
 
 Queue.prototype.dequeue = function() {
