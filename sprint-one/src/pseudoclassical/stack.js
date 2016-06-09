@@ -11,7 +11,13 @@ Stack.prototype.push = function(val) {
 };
 
 Stack.prototype.pop = function() {
-  
+  if (!this.length) {
+    return 0;
+  }
+  this.length--;
+  var toPop = this.storage[this.length];
+  delete this.storage[this.length];
+  return toPop;
 };
 
 Stack.prototype.size = function() {
