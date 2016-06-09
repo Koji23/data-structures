@@ -35,6 +35,12 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
+    for (var currentNode = this.head; currentNode !== this.tail; currentNode = currentNode.next) {
+      if (currentNode.value === target) {
+        return true;
+      }
+    }
+    return currentNode.value === target;
   };
 
   return list;
