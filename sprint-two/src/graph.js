@@ -2,10 +2,12 @@
 
 // Instantiate a new graph
 var Graph = function() {
+  this.storage = {};
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  this.storage[node] = {};
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -22,6 +24,8 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
+  this.storage[fromNode][toNode] = this.storage[toNode];
+  this.storage[toNode][fromNode] = this.storage[fromNode];
 };
 
 // Remove an edge between any two specified (by value) nodes.
