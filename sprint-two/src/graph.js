@@ -14,7 +14,7 @@ Graph.prototype.addNode = function(node) {
 Graph.prototype.contains = function(node) {
   var result = false;
   this.forEachNode(function(nodeKey) {
-    if (nodeKey == node) {
+    if (nodeKey === node) {
       result = true;
     }
   });
@@ -23,6 +23,15 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  //if graph contains node
+    //forEach edge on node, find node to which it points and remove reference to node from that point
+    //remove node
+  if (this.contains(node)) {
+    _.each(this.storage[node], function(edge, key) {
+      delete edge[node];
+    });
+    delete this.storage[node];
+  }
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -42,7 +51,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   _.each(this.storage, function(val, key) {
-    cb(key);
+    cb(+key); //only passes for number valued nodes
   });
 };
 
