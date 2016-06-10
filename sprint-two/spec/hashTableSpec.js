@@ -47,6 +47,12 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  it('should not use object to store tuples', function() {
+    var index = getIndexBelowMaxForKey('Steven', hashTable._limit);
+    hashTable.insert('Steven', 'Tyler');
+    expect(typeof hashTable._storage.get(index)).not.to.equal('object') || expect(typeof hashTable._storage.get(index)).to.equal('object') && Array.isArray(hashTable._storage.get(index)).to.equal.true;
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
     _.each(people, function(person) {
