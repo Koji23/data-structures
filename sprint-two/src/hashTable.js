@@ -7,8 +7,21 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  if (this._storage.get(index)) {
-    this._storage.get(index).push([k, v]);
+  var toOverwrite = false;
+  var tupleCollection = this._storage.get(index);
+
+  if (tupleCollection) {
+    _.each(tupleCollection, function(tuple) {
+      if ([tuple][0] === k) {
+        toOverwrite = true;
+      }
+    });
+
+    if (!toOverwrite) {
+      this._storage.get(index).push([k, v]);
+    } else {
+      tupleCollection[k] = v;
+    }
   } else {
     var limit = this._limit;
     this._storage.set(index, []);
@@ -37,6 +50,11 @@ HashTable.prototype.remove = function(k) {
   });
 };
 
+var ary = [1, 2, 3, 4, 5];
+
+_.each(ary, function(val, index, collection) {
+  val = 7;
+});
 
 
 /*
