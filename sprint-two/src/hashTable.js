@@ -3,30 +3,61 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._entries = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var toOverwrite = false;
   var tupleCollection = this._storage.get(index);
+  var currentThis = this;
+  //doubling on insertion @ 75%:
+  if (this._entries === Math.floor(.75 * this._limit)) {
+    this._limit *= 2;
+    var _newStorage = LimitedArray(this._limit);
+    this._storage.each(function(bucket) {
+      if (bucket !== undefined) {
+        _.each(bucket, function(tuple) {
+          var newIndex = getIndexBelowMaxForKey(tuple[0], currentThis._limit);
+          if (_newStorage.get(newIndex) === undefined) {
+            _newStorage.set(newIndex, []);
+          }
+          _newStorage.get(newIndex).push(tuple);
+        });
+      }
+    });
+    this._storage = _newStorage;
+  }
 
-  if (tupleCollection) {
-    _.each(tupleCollection, function(tuple) {
+
+
+
+
+  //insertion
+  if (tupleCollection !== undefined) {
+    _.each(tupleCollection, function(tuple, tupleIndex) {
       if ([tuple][0] === k) {
-        toOverwrite = true;
+        toOverwrite = tupleIndex;
       }
     });
 
-    if (!toOverwrite) {
-      this._storage.get(index).push([k, v]);
+    if (toOverwrite === false) {
+      tupleCollection.push([k, v]);
+      this._entries++;
     } else {
-      tupleCollection[k] = v;
+      tupleCollection[tupleIndex][1] = v;
     }
   } else {
     var limit = this._limit;
     this._storage.set(index, []);
     this._storage.get(index).push([k, v]);
+    this._entries++;
   }
+
+
+
+
+
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -46,15 +77,13 @@ HashTable.prototype.remove = function(k) {
   _.each(tupleCollection, function(tuple, i) {
     if (k === tuple[0]) {
       tupleCollection.splice(i, 1);
+      this._entries--;
     }
   });
+
+
+  //halving on removal @ 25%
 };
-
-var ary = [1, 2, 3, 4, 5];
-
-_.each(ary, function(val, index, collection) {
-  val = 7;
-});
 
 
 /*
