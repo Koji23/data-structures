@@ -4,7 +4,6 @@ var Queue = function() {
   this.tail = 0;
 };
 
-// Queue.prototype.constructor = Queue;
 Queue.prototype.enqueue = function(val) {
   this.storage[this.tail] = val;
   this.tail++;
