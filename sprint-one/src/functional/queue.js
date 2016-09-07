@@ -5,8 +5,8 @@ var Queue = function() {
   var storage = {};
 
   // Implement the methods below
-  someInstance.head = 0;
-  someInstance.tail = 0;
+  var head = 0;
+  var tail = 0;
 
   someInstance.enqueue = function(value) {
     storage[tail] = value;
@@ -24,7 +24,8 @@ var Queue = function() {
   };
 
   someInstance.size = function() {
-    return tail - head >= 0 ? (tail - head) : 0;
+    var diff = tail - head;
+    return diff >= 0 ? diff : 0;
   };
 
   return someInstance;
